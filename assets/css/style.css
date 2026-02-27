@@ -86,6 +86,7 @@ body{
 
 .typing-texto{
     color: var(--dark-color);
+    font-size: 2rem;
 }
 
 h1{
