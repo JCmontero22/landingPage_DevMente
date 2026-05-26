@@ -1,7 +1,50 @@
+// Cerrar el menú hamburguesa al hacer clic en un enlace
+
 function init() {
     textosHeader();
     scrollNav();
     animarServiciosCards();
+    cerrarMenuAlClickearLink();
+}
+
+function cerrarMenuAlClickearLink() {
+    const menuToggle = document.getElementById('menuToggle');
+    const navbarCollapse = document.getElementById('navbarNav');
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+
+    // Toggle del menú cuando se hace clic en el botón
+    menuToggle.addEventListener('click', () => {
+        navbarCollapse.classList.toggle('show');
+
+        if (navbarCollapse.classList.contains('show')) {
+            menuToggle.classList.remove('collapsed');
+            menuToggle.setAttribute('aria-expanded', 'true');
+        } else {
+            menuToggle.classList.add('collapsed');
+            menuToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+
+    // Cerrar el menú cuando se hace clic en un link
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navbarCollapse.classList.remove('show');
+            menuToggle.classList.add('collapsed');
+            menuToggle.setAttribute('aria-expanded', 'false');
+        });
+    });
+
+    // Cerrar el menú cuando se hace clic fuera
+    document.addEventListener('click', (e) => {
+        const navbar = document.querySelector('.navbar');
+        if (!navbar.contains(e.target) && navbarCollapse.classList.contains('show')) {
+            navbarCollapse.classList.remove('show');
+            menuToggle.classList.add('collapsed');
+            menuToggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+}
+
 // Animar las cards de servicios al entrar en el viewport
 function animarServiciosCards() {
     const serviciosSection = document.getElementById('servicios');
@@ -59,11 +102,10 @@ function animarServiciosCards() {
     // Por si ya está visible al cargar
     activarAnimacion();
 }
-}
 
 function textosHeader() {
     const typingTextElement = document.getElementById('typing-text');
-        const words = ["Desarrollo Web.", "Diseño UI/UX.", "Paginas web a tu medida."];
+        const words = ["Desarrollo Web.", "Manejo de redes.", "Paginas web a tu medida."];
         let wordIndex = 0;
         let charIndex = 0;
         let isDeleting = false;

@@ -1,3 +1,19 @@
+/* Mostrar el menú hamburguesa correctamente en pantallas pequeñas */
+@media (max-width: 575.98px) {
+    .navbar-collapse {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100vw;
+        background: #fff;
+        z-index: 9999;
+        padding: 2rem 0 1rem 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    }
+    .navbar-nav {
+        padding-left: 1rem;
+    }
+}
 html {
     box-sizing: border-box;
     font-size: 80.5%;
@@ -44,6 +60,7 @@ body{
     --link-color: #c8a97e;
     --colorFondoSarai: blue;
     --colorBlanco: #fff;
+    --doradoTextosPrincipales: rgb(239, 191, 4);
 
     /* Fuente */
     --fuentePrincipal: 3.8rem;
@@ -86,7 +103,8 @@ body{
 
 .typing-texto{
     color: var(--dark-color);
-    font-size: 2rem;
+    font-size: 2.3rem;
+    font-weight: 300;
 }
 
 h1{
@@ -184,6 +202,56 @@ img{
 .paginas:hover{
     cursor: pointer;
 }
+
+/* Iconos flotantes de redes sociales */
+.social-float {
+    position: fixed;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.social-float-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #fff;
+    color: #333;
+    font-size: 1.7rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    transition: all 0.3s;
+    border: 2px solid #e7edf8;
+}
+
+.social-float-icon.facebook {
+    color: #1877f3;
+}
+.social-float-icon.instagram {
+    color: #e4405f;
+}
+.social-float-icon.tiktok {
+    color: #000;
+}
+
+.social-float-icon.whatsapp {
+    color: #25d366;
+}
+
+.social-float-icon:hover {
+    background: var(--primary-color);
+    color: #fff;
+    border-color: var(--primary-color);
+    transform: scale(1.1);
+}
+
+
 
 /*************** HEADER ***************/
 .navbar{
@@ -486,4 +554,139 @@ img{
 
 .lanzamiento{
     animation-delay: 1.3s;
+}
+
+/***********************************************************
+
+        ************ MEDIA QUERIES **********
+
+************************************************************/
+/* ===================== MENU HAMBURGUESA RESPONSIVE ===================== */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background: #fff;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100vw;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        padding: 2rem 0 1rem 0;
+        z-index: 999;
+    }
+    .navbar-nav {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        width: 100%;
+        padding-left: 2rem;
+    }
+    .navbar-nav .nav-item {
+        margin: 0.5rem 0;
+    }
+    .navbar-toggler {
+        border: none;
+        outline: none;
+        box-shadow: none;
+    }
+    .navbar-toggler-icon {
+        width: 2rem;
+        height: 2rem;
+        background-image: url('data:image/svg+xml;charset=utf8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="rgba%2833,37,41, 0.7%29" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"/%3E%3C/svg%3E');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+    }
+}
+
+/* ===================== RESPONSIVE MÓVILES ===================== */
+@media (max-width: 768px) {
+    .servicios-card {
+        width: calc(50% - 1rem);
+    }
+
+    .content-card {
+        flex-wrap: wrap;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    h2 {
+        font-size: 2rem !important;
+    }
+
+    .sobre-nosotros-img {
+        width: 100%;
+        max-width: 25rem;
+    }
+
+    .row {
+        margin: 0 !important;
+    }
+}
+
+@media (max-width: 576px) {
+    .servicios-card {
+        width: 100%;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    h1 {
+        font-size: 2rem !important;
+    }
+
+    h2 {
+        font-size: 1.6rem !important;
+    }
+
+    h3 {
+        font-size: 1.3rem !important;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .sobre-nosotros-img {
+        width: 100%;
+        max-width: 20rem;
+    }
+
+    .col-md-3 {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .col-md-4 {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .col-md-6 {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .skill-tag {
+        display: block;
+        margin: 0.5rem 0;
+    }
+
+    .form-control {
+        margin-bottom: 1rem !important;
+    }
+
+    .social-float {
+        left: 10px;
+        gap: 10px;
+    }
+
+    .social-float-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.4rem;
+    }
 }
