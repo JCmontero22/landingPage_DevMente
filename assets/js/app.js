@@ -188,12 +188,12 @@ function validarFormularioContacto() {
 
 function envioEmail(formData) {
     $.ajax({
-        'method': 'POST',
-        'url': './mail/envioCorreo.php',
-        'data': formData,
-        'dataType': 'json',
-        'success': function(response){
-            if (response.status == true) {
+        method: 'POST',
+        url: './mail/envioCorreo.php',
+        data: formData,
+        dataType: 'json',
+        success: function(response) {
+            if (response.status === true) {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -201,27 +201,43 @@ function envioEmail(formData) {
                     showConfirmButton: false,
                     timer: 1500
                 });
-
                 $("#formularioContacto")[0].reset();
-            }else{
+            } else {
                 Swal.fire({
                     icon: "error",
                     title: "Error",
                     text: response.mensaje,
-                }); 
+                });
             }
-            
+        },
+        error: function(xhr, status, error) {
+            console.error('Error AJAX:', error);
+            Swal.fire({
+                icon: "error",
+                title: "Error de conexión",
+                text: "No se pudo enviar el mensaje. Intenta de nuevo.",
+            });
         }
-    }); 
+    });
 }
 
-function gestionEnvioEmail() {
+function gestionEnvioEmail(event) {
+    if (event) {
+        event.preventDefault();
+    }
+
     let camposValidados = validarFormularioContacto();
     if (camposValidados) {
         envioEmail(camposValidados);
     }
 }
 
-
+function iniciarFormulario() {
+    const form = document.getElementById('formularioContacto');
+    if (form) {
+        form.addEventListener('submit', gestionEnvioEmail);
+    }
+}
 
 init();
+iniciarFormulario();
