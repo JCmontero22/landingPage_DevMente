@@ -45,26 +45,53 @@
 
     function envioCorreo($plantilla, $datos) {
         try {
-        
+
             $mail = new PHPMailer(true);
+
+            // DEBUG
+            $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+            $mail->Debugoutput = function($str, $level) {
+                echo $str . "<br>";
+            };
+
             $mail->isSMTP();
             $mail->Host = SMTP_HOST;
-            $mail->SMTPAuth = true; // Habilita la autenticación SMTP
+            $mail->SMTPAuth = true;
             $mail->Username = SMTP_USERNAME;
             $mail->Password = SMTP_PASSWORD;
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; 
-            $mail->Port = SMTP_PORT; // Usar el puerto 587 para STARTTLS
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            $mail->Port = SMTP_PORT;
+
+            // SOLO PARA PRUEBAS
+            $mail->SMTPOptions = [
+                'ssl' => [
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                ]
+            ];
+
             $mail->setFrom(SMTP_FROM, SMTP_FROM_NAME);
             $mail->addAddress(SMTP_ADDRESS);
-            
+
             $mail->isHTML(true);
             $mail->Subject = 'Nuevo mensaje de ' . $datos['nombre'];
             $mail->Body = $plantilla;
-    
+
             $mail->send();
-            echo json_encode(['status' => true, 'mensaje' => 'Solicitud enviada correctamente']);
+
+            echo json_encode([
+                'status' => true,
+                'mensaje' => 'Solicitud enviada correctamente'
+            ]);
+
         } catch (Exception $e) {
-            echo json_encode(['status' => false, 'mensaje' => 'Fallo al enviar la solicitud', 'error' => $e->getMessage()]);
+
+            echo json_encode([
+                'status' => false,
+                'mensaje' => 'Fallo al enviar la solicitud',
+                'error' => $mail->ErrorInfo
+            ]);
         }
     }
 
