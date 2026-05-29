@@ -22,4 +22,4 @@ define('SMTP_FROM_NAME', getenv('SMTP_FROM_NAME') ?: 'JMontero Freelance');
 define('SMTP_ADDRESS', getenv('SMTP_ADDRESS') ?: '');
 
 // Application Configuration
-define('PRODUCTION', false); // Set to false for development/debugging
+define('PRODUCTION', true); // Set to false for development/debugging
