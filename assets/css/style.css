@@ -1,4 +1,4 @@
-
+/* Igualar altura de tarjetas de clientes */
 html {
     box-sizing: border-box;
     font-size: 80.5%;
@@ -238,6 +238,7 @@ img{
 
 
 
+
 /*************** HEADER ***************/
 .navbar{
     transition: background-color 0.2s ease;
@@ -454,6 +455,8 @@ img{
     height: 10rem;
     width: 20rem;
 }
+
+
 
 /*************** FOOTER ***************/
 .footer{
